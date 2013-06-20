@@ -2,14 +2,27 @@ package com.flyingh.guava;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 public class Demo {
+	@Test
+	public void test4() {
+		Set<Integer> set = Optional.of(3).asSet();
+		System.out.println(set.getClass());
+		System.out.println(Objects.toStringHelper(set)
+				.add("info", "hello world!!!").toString());
+		System.out.println(Objects.toStringHelper(set.getClass()));
+		System.out.println(Objects.toStringHelper("java.lang.String").add("a",
+				"1"));
+	}
+
 	@Test
 	public void test3() {
 		Optional<Object> absent = Optional.fromNullable(null);
