@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.base.Objects;
@@ -12,6 +13,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 public class Demo {
+	@Test
+	public void test5() {
+		Assert.assertFalse(Double.NaN > 0);
+		Assert.assertFalse(Double.NaN == 0);
+		Assert.assertFalse(Double.NaN < 0);
+	}
+
 	@Test
 	public void test4() {
 		Set<Integer> set = Optional.of(3).asSet();
