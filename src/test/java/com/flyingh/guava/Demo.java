@@ -1,5 +1,6 @@
 package com.flyingh.guava;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,16 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 public class Demo {
+	@Test
+	public void test6() {
+		ArrayList<String> list = Lists.newArrayList("a","b","c","d","e");
+		String[] strs=new String[8];
+		Arrays.fill(strs, "abc");
+		String[] array = list.toArray(strs);
+		System.out.println(Arrays.toString(array));
+		System.out.println(Arrays.toString(strs));
+	}
+
 	@Test
 	public void test5() {
 		Assert.assertFalse(Double.NaN > 0);
