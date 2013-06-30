@@ -15,16 +15,17 @@ import com.google.common.collect.Ordering;
 
 public class Demo {
 	@Test
-	public void test7(){
-		int a=158;
+	public void test7() {
+		int a = 158;
 		System.out.println(~a);
-		int b=-158;
+		int b = -158;
 		System.out.println(~b);
 	}
+
 	@Test
 	public void test6() {
-		ArrayList<String> list = Lists.newArrayList("a","b","c","d","e");
-		String[] strs=new String[8];
+		ArrayList<String> list = Lists.newArrayList("a", "b", "c", "d", "e");
+		String[] strs = new String[8];
 		Arrays.fill(strs, "abc");
 		String[] array = list.toArray(strs);
 		System.out.println(Arrays.toString(array));
