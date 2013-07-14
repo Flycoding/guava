@@ -39,8 +39,38 @@ class Order implements Serializable {
 	}
 }
 
+enum Sex {
+	MALE, FEMALE;
+	private Sex() {
+	}
+}
+
 public class Demo {
-	
+
+	@Test
+	public void test11() throws SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InstantiationException,
+			IllegalAccessException, InvocationTargetException {
+		Constructor<?>[] constructors = Sex.class.getConstructors();
+		for (Constructor<?> constructor : constructors) {
+			System.out.println(constructor);
+		}
+		System.out.println("*******************");
+		Constructor<?>[] declaredConstructors = Sex.class
+				.getDeclaredConstructors();
+		for (Constructor<?> constructor : declaredConstructors) {
+			System.out.println(constructor);
+		}
+		System.out.println("####################");
+		Constructor<Sex> declaredConstructor = Sex.class
+				.getDeclaredConstructor(String.class, int.class);
+		System.out.println(declaredConstructor);
+		declaredConstructor.setAccessible(true);
+		// error:throw new
+		// IllegalArgumentException("Cannot reflectively create enum objects");
+		System.out.println(declaredConstructor.newInstance("UNKNOWN", 2));
+	}
+
 	@Test
 	public void test10() throws FileNotFoundException, IOException,
 			ClassNotFoundException, SecurityException, NoSuchMethodException,
