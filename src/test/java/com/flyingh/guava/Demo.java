@@ -8,12 +8,40 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.base.Equivalence;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 public class Demo {
+	class LengthEquivalence extends Equivalence<String> {
+
+		@Override
+		protected boolean doEquivalent(String a, String b) {
+			return a.length() == b.length();
+		}
+
+		@Override
+		protected int doHash(String t) {
+			return t.hashCode();
+		}
+
+	}
+
+	@Test
+	public void test9() {
+		LengthEquivalence le = new LengthEquivalence();
+		Assert.assertTrue(le.equivalent("a", "b"));
+		Assert.assertFalse(le.equivalent("a", "hello"));
+	}
+
+	@Test
+	public void test8() {
+		System.out.println("Aa".hashCode());
+		System.out.println("BB".hashCode());
+	}
+
 	@Test
 	public void test7() {
 		int a = 158;
