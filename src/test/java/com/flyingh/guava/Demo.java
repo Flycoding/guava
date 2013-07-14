@@ -1,5 +1,12 @@
 package com.flyingh.guava;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +21,39 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
+class Order implements Serializable {
+	private static final long serialVersionUID = -271725743026637470L;
+	private static final Order INSTANCE = new Order();
+
+	private Order() {
+	}
+
+	public static Order getInstance() {
+		return INSTANCE;
+	}
+
+	private Object readResolve() {
+		return INSTANCE;
+	}
+}
+
 public class Demo {
+
+	@Test
+	public void test10() throws FileNotFoundException, IOException,
+			ClassNotFoundException {
+		System.out.println(Order.getInstance() == Order.getInstance());
+		String path = "C:\\order.ser";
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
+				path));
+		oos.writeObject(Order.getInstance());
+		oos.close();
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));
+		Object order2 = ois.readObject();
+		ois.close();
+		System.out.println(order2 == Order.getInstance());
+	}
+
 	class LengthEquivalence extends Equivalence<String> {
 
 		@Override
