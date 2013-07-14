@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +40,14 @@ class Order implements Serializable {
 }
 
 public class Demo {
-
+	
 	@Test
 	public void test10() throws FileNotFoundException, IOException,
-			ClassNotFoundException {
+			ClassNotFoundException, SecurityException, NoSuchMethodException,
+			IllegalArgumentException, InstantiationException,
+			IllegalAccessException, InvocationTargetException {
 		System.out.println(Order.getInstance() == Order.getInstance());
-		String path = "C:\\order.ser";
+		String path = "order.ser";
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
 				path));
 		oos.writeObject(Order.getInstance());
@@ -52,6 +56,10 @@ public class Demo {
 		Object order2 = ois.readObject();
 		ois.close();
 		System.out.println(order2 == Order.getInstance());
+		Constructor<Order> conc = Order.class.getDeclaredConstructor();
+		conc.setAccessible(true);
+		Order newInstance = conc.newInstance();
+		System.out.println(newInstance == Order.getInstance());
 	}
 
 	class LengthEquivalence extends Equivalence<String> {
